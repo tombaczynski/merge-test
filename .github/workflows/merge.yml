@@ -2,28 +2,26 @@ name: Scalanie Markdown i Publikacja w Releases
 
 on:
   push:
-    branches: [ main ] # Uruchamia po wysłaniu zmian do gałęzi main
+    branches: [ main ]
 
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Uprawnienia do tworzenia wydań (Releases)
+      contents: write
 
     steps:
     - name: Pobranie kodu repozytorium
       uses: actions/checkout@v4
 
     - name: Konfiguracja środowiska Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.x'
+      uses: actions/setup-python@v5.4.0 # Zaktualizowana wersja z obsługą nowszego Node
 
     - name: Uruchomienie skryptu łączącego
       run: python merge.py
 
     - name: Publikacja scalonego pliku do Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v2.2.1 # Zaktualizowana wersja
       with:
         files: gotowy_dokument.md
         tag_name: latest
