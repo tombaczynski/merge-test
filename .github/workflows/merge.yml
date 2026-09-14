@@ -1,0 +1,35 @@
+name: Scalanie Markdown i Publikacja w Releases
+
+on:
+  push:
+    branches: [ main ] # Uruchamia po wysłaniu zmian do gałęzi main
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Uprawnienia do tworzenia wydań (Releases)
+
+    steps:
+    - name: Pobranie kodu repozytorium
+      uses: actions/checkout@v4
+
+    - name: Konfiguracja środowiska Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Uruchomienie skryptu łączącego
+      run: python merge.py
+
+    - name: Publikacja scalonego pliku do Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: gotowy_dokument.md
+        tag_name: latest
+        name: Najnowsze scalone wydanie
+        body: |
+          Automatycznie wygenerowana pełna wersja dokumentacji.
+          Pobierz plik `gotowy_dokument.md` z sekcji Assets poniżej.
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
