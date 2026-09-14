@@ -1,0 +1,13 @@
+title: Różne materiały
+description: Strona zawierająca różne materiały.
+
+# Włączenie motywu Just the Docs (natywnie wspieranego przez GitHub Pages)
+# plugins:
+#  - just-the-docs
+
+# Adres URL Twojej strony
+url: "https://tombaczynski.github.io"
+baseurl: "/public"
+
+# Włączenie wbudowanej wyszukiwarki
+search_enabled: true
